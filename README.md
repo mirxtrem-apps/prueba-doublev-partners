@@ -47,3 +47,42 @@ carácteristicas.
 Dado: que el usuario esta en la pantalla de direccion de envio,
 Cuando: cuando selecciona la opcion de finalizar 
 Entonces: La aplicación lo redirige a la pantalla del home
+
+**HU02: Como usuario Quiero agregar una dirección de envio en la aplicación Para poder montar una orden de compra.**
+
+**Criterio 01:**
+Dado: que el usuario esta registrado,
+Cuando: el usuario esta en el home
+Entonces: La aplicacion muestra los datos del usuario en la parte superior para ir al perfil
+- La opcion mostrará un avatar y el texto: Bienvenido, {username}
+
+**Criterio 02:**
+Dado: que el usuario esta registrado,
+Cuando: el usuario esta en la pantalla de perfil
+Entonces: La aplicacion muestra un menu con las siguientes opciones.
+- Datos del usuario: avatar, nombre y correo
+- Opción para administrar sus direcciones (Mis direcciones de envio)
+- Opción para ver sus ordenes (Mis ordenes)
+- Opcion para administrar sus metodos de pago (Mis métodos de pago)
+
+**Criterio 03:**
+Dado: que el usuario esta en la pantalla de perfil,
+Cuando: el usuario selecciona la opcion de agregar direcciones
+Entonces: La aplicacion lo redirige a la pantall de Mis direcciones de envio
+
+La pantalla debe tener estas caracteristicas:
+- Lista con las direcciones de envio registradas
+- Un botón para crear una nueva direccion
+- Un botón para editar una dirección existente
+
+**Criterio 04:**
+Dado: que el usuario esta en la pantalla de agregar direcciones,
+Cuando: el usuario selecciona la opcion de crear una dirección
+Entonces: La aplicacion lo redirige a la pantalla de crear dirección
+
+La pantalla debe tener un formulario estas caracteristicas:
+- Campo para ingresar la dirección
+- Campo para ingresar la cuidad
+- Campo para ingresar el departamento
+- Campo para ingresar código postal
+- Botón para guardar
