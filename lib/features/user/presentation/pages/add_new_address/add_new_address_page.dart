@@ -4,13 +4,12 @@ import 'package:flutter_tdd/core/shared/widgets/inputs/inputs.dart';
 import 'package:flutter_tdd/core/shared/widgets/labels/title_label.dart';
 
 class AddNewAddressPage extends StatelessWidget {
+  const AddNewAddressPage({super.key});
 
-  const AddNewAddressPage({ super.key });
-
-   @override
-   Widget build(BuildContext context) {
-       return Scaffold(
-           appBar: AppBar(),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
       body: Container(
         constraints: const BoxConstraints.expand(),
         child: SingleChildScrollView(
@@ -45,6 +44,6 @@ class AddNewAddressPage extends StatelessWidget {
           )),
         ),
       ),
-       );
+    );
   }
 }

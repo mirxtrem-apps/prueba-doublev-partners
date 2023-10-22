@@ -6,6 +6,7 @@ class SolidButton extends StatelessWidget {
     required this.label,
     this.textColor,
     this.backgroundColor,
+    this.width,
     this.onPressed,
   });
 
@@ -13,11 +14,12 @@ class SolidButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final Color? backgroundColor;
   final Color? textColor;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
+      width: width ?? double.infinity,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ButtonStyle(
