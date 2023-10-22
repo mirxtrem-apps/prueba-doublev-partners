@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "920872350623",
+    "project_id": "mirxtremapps-48409",
+    "storage_bucket": "mirxtremapps-48409.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:920872350623:android:35ce555bd2fb42e8f9c3aa",
+        "android_client_info": {
+          "package_name": "com.mirxtremapps.flutter_tdd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "920872350623-e2umf836qpjshenenl4dk6nmntn9frcg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnO1csIkv4WAOB2mY2BZqRZeilnghvD3A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "920872350623-e2umf836qpjshenenl4dk6nmntn9frcg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
