@@ -10,7 +10,7 @@ class AddressListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var addressList = [1];
+    var addressList = [];
     return Scaffold(
       appBar: AppBar(
         title: const Text("My Addresses"),

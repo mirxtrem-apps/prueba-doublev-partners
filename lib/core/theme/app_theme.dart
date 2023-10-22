@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '/core/theme/label_styles.dart';
 
 abstract class AppTheme {
-  static get defaultTheme => ThemeMode.light;
+  static get defaultTheme => ThemeMode.dark;
 
   static ThemeData light() {
     return ThemeData.light(
