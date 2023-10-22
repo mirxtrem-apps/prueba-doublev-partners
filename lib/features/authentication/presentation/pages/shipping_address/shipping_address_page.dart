@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tdd/core/routes/app_routes.dart';
-import 'package:flutter_tdd/core/shared/widgets/buttons/buttons.dart';
-import 'package:flutter_tdd/core/shared/widgets/inputs/inputs.dart';
-import 'package:flutter_tdd/core/shared/widgets/labels/title_label.dart';
+
+import '/core/routes/app_routes.dart';
+import '/core/shared/widgets/buttons/buttons.dart';
+import '/core/shared/widgets/inputs/inputs.dart';
+import '/core/shared/widgets/labels/title_label.dart';
 
 class ShippingAddressPage extends StatelessWidget {
   const ShippingAddressPage({super.key});
@@ -45,7 +46,10 @@ class ShippingAddressPage extends StatelessWidget {
               SolidButton(
                 label: "Finish",
                 onPressed: () {
-                  Navigator.of(context).popAndPushNamed(Routes.home);
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    Routes.home,
+                    (route) => route.settings.name == Routes.home,
+                  );
                 },
               ),
             ],
