@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tdd/core/routes/app_routes.dart';
+import 'package:flutter_tdd/features/home/presentation/pages/splash/widget/splash_logo.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -14,27 +15,17 @@ class SplashPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Spacer(flex: 2),
-            const Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(
-                  height: 90,
-                  width: 90,
-                  child: Placeholder(),
-                ),
-                SizedBox(height: 20.0),
-                Text("Store"),
-              ],
-            ),
-            const Spacer(
-              flex: 1,
-            ),
-            ElevatedButton(
-              key: const Key("Register"),
-              onPressed: () {
-                Navigator.of(context).pushNamed(Routes.register);
-              },
-              child: const Text("Register"),
+            const SplashLogo(),
+            const Spacer(flex: 1),
+            SizedBox(
+              width: 280.0,
+              child: ElevatedButton(
+                key: const Key("Register"),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(Routes.register);
+                },
+                child: const Text("Register"),
+              ),
             ),
             TextButton(
               onPressed: () {},

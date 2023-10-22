@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tdd/core/theme/label_styles.dart';
 
+final _defaultSolidButtonTheme = ElevatedButtonThemeData(
+  style: ButtonStyle(
+    visualDensity: VisualDensity.adaptivePlatformDensity,
+    shape: MaterialStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+    ),
+  ),
+);
+final _defaultInputTheme = InputDecorationTheme(
+  isDense: true,
+  labelStyle: LabelStyle.label(),
+  border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+);
+
 abstract class AppTheme {
   static get defaultTheme => ThemeMode.dark;
 
@@ -8,13 +24,8 @@ abstract class AppTheme {
     return ThemeData.light(
       useMaterial3: true,
     ).copyWith(
-      inputDecorationTheme: InputDecorationTheme(
-        isDense: true,
-        labelStyle: LabelStyle.label(),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.0)
-        ),
-      ),
+      elevatedButtonTheme: _defaultSolidButtonTheme,
+      inputDecorationTheme: _defaultInputTheme,
     );
   }
 
@@ -22,13 +33,8 @@ abstract class AppTheme {
     return ThemeData.dark(
       useMaterial3: true,
     ).copyWith(
-      inputDecorationTheme: InputDecorationTheme(
-        isDense: true,
-        labelStyle: LabelStyle.label(),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.0)
-        ),
-      ),
+      elevatedButtonTheme: _defaultSolidButtonTheme,
+      inputDecorationTheme: _defaultInputTheme,
     );
   }
 }
