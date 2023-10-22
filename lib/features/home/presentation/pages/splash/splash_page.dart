@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tdd/core/routes/app_routes.dart';
-import 'package:flutter_tdd/features/home/presentation/pages/splash/widget/splash_logo.dart';
+
+import '/core/routes/app_routes.dart';
+import '/core/shared/widgets/buttons/buttons.dart';
+import '/features/home/presentation/pages/splash/widget/splash_logo.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -10,29 +12,29 @@ class SplashPage extends StatelessWidget {
     return Scaffold(
       body: Container(
         constraints: const BoxConstraints.expand(),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Spacer(flex: 2),
-            const SplashLogo(),
-            const Spacer(flex: 1),
-            SizedBox(
-              width: 280.0,
-              child: ElevatedButton(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Spacer(flex: 2),
+              const SplashLogo(),
+              const Spacer(flex: 1),
+              SolidButton(
                 key: const Key("Register"),
+                label: "Register",
                 onPressed: () {
                   Navigator.of(context).pushNamed(Routes.register);
                 },
-                child: const Text("Register"),
               ),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: const Text("Maybe later"),
-            ),
-            const SizedBox(height: 30.0)
-          ],
+              FlatButton(
+                label: "Maybe later",
+                onPressed: () {},
+              ),
+              const SizedBox(height: 30.0)
+            ],
+          ),
         ),
       ),
     );

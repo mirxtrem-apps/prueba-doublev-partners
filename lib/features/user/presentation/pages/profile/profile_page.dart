@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tdd/core/routes/app_routes.dart';
 import 'package:flutter_tdd/core/shared/widgets/buttons/solid_button.dart';
 import 'package:flutter_tdd/features/user/presentation/pages/profile/widgets/profile_option_tile.dart';
 
@@ -19,7 +20,9 @@ class ProfilePage extends StatelessWidget {
             ProfileOptionTile(
               label: "My Shipping Adrresses",
               icon: Icons.location_on_rounded,
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed(Routes.addressList);
+              },
             ),
             ProfileOptionTile(
               label: "My Orders",
