@@ -10,7 +10,7 @@ class AddNewAddressPage extends StatelessWidget {
    @override
    Widget build(BuildContext context) {
        return Scaffold(
-           appBar: AppBar(title: const Text('New Address'),),
+           appBar: AppBar(),
       body: Container(
         constraints: const BoxConstraints.expand(),
         child: SingleChildScrollView(
