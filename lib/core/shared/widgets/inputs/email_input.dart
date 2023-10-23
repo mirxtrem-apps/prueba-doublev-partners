@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tdd/core/utils/input_utils.dart';
 
 class EmailInput extends StatelessWidget {
   const EmailInput({
@@ -14,12 +15,11 @@ class EmailInput extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 12.0),
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
+        keyboardType: TextInputType.emailAddress,
         key: const Key("email"),
         controller: controller,
         decoration: const InputDecoration(labelText: "E-mail"),
-        validator: (value) {
-          return null;
-        },
+        validator: InputUtils.isEmailValid,
       ),
     );
   }

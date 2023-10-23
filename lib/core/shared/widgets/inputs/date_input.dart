@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tdd/core/utils/input_utils.dart';
 
 class DateInput extends StatelessWidget {
   const DateInput({
@@ -17,13 +18,15 @@ class DateInput extends StatelessWidget {
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
         keyboardType: TextInputType.datetime,
+        inputFormatters: [
+          InputUtils.formatterDate(),
+        ],
         controller: controller,
         decoration: InputDecoration(
           labelText: labelText,
+          hintText: 'dd/mm/yyyy',
         ),
-        validator: (value) {
-          return null;
-        },
+        validator: InputUtils.isEmpty,
       ),
     );
   }

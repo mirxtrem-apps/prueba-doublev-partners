@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tdd/core/shared/widgets/buttons/buttons.dart';
-import 'package:flutter_tdd/core/theme/label_styles.dart';
+
+import '/core/shared/widgets/buttons/buttons.dart';
+import '/core/theme/label_styles.dart';
 
 class AddressInfoTile extends StatelessWidget {
   const AddressInfoTile({

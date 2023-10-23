@@ -1,23 +1,56 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tdd/core/routes/app_pages.dart';
-import 'package:flutter_tdd/core/routes/app_routes.dart';
-import 'package:flutter_tdd/features/authentication/presentation/pages/shipping_address/shipping_address_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:flutter_tdd/features/authentication/presentation/bloc/auth_bloc.dart';
+import 'package:flutter_tdd/features/user/application/use_cases/use_cases.dart';
+import 'package:flutter_tdd/features/authentication/application/use_cases/use_cases.dart';
+import 'package:flutter_tdd/features/authentication/presentation/pages/shipping_address/shipping_address_page.dart';
+
+import '../register/register_page_test.mocks.dart';
+
 void main() {
+  late Widget materialApp;
+  late MockAuthRepository mockAuthRepository;
+  late MockUserRepository mockUserRepository;
+  late MockLocalRepository mockLocalRepository;
+  setUp(() {
+    mockAuthRepository = MockAuthRepository();
+    mockUserRepository = MockUserRepository();
+    mockLocalRepository = MockLocalRepository();
+    materialApp = MaterialApp(
+      home: BlocProvider<AuthBloc>(
+        create: (context) => AuthBloc(
+          saveTokenUseCase: SaveTokenUseCase(
+            localRepository: mockLocalRepository,
+          ),
+          createUserUseCase: CreateUserUseCase(
+            repository: mockUserRepository,
+          ),
+          registerUserUseCase: RegisterUserUseCase(
+            authRepository: mockAuthRepository,
+          ),
+          updateUserUseCase: UpdateUserUseCase(
+            repository: mockUserRepository,
+          ),
+          persistUserUseCase: PersistUserUseCase(
+            localRepository: mockLocalRepository,
+          ),
+        ),
+        child: const ShippingAddressPage(),
+      ),
+    );
+  });
   group('Register - Step 3: Shipping Address Form', () {
     testWidgets(
         'Should have a form when user is redirected to PersonalDataPage',
         (WidgetTester tester) async {
-      await tester.pumpWidget(MaterialApp(
-        initialRoute: Routes.shippingAddress,
-        routes: AppPages.routes,
-      ));
-      
+      await tester.pumpWidget(materialApp);
+
       // start in Shipping Address Page
       Finder page = find.byType(ShippingAddressPage);
       expect(page, findsOneWidget);
-      
+
       // find title text
       Finder title = find.text("Shipping Address");
       expect(title, findsOneWidget);

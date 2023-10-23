@@ -1,18 +1,55 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tdd/core/routes/app_pages.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:flutter_tdd/core/routes/app_routes.dart';
+import 'package:flutter_tdd/features/authentication/presentation/bloc/auth_bloc.dart';
+import 'package:flutter_tdd/features/user/application/use_cases/use_cases.dart';
+import 'package:flutter_tdd/features/authentication/application/use_cases/use_cases.dart';
+import 'package:flutter_tdd/features/authentication/infrastructure/repositories/auth_repository.dart';
+import 'package:flutter_tdd/core/app/infrastructure/repositories/local_repository.dart';
+import 'package:flutter_tdd/features/user/infrastructure/repositories/user_repository.dart';
 import 'package:flutter_tdd/features/authentication/presentation/pages/register/register_page.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 
+import 'register_page_test.mocks.dart';
+
+@GenerateMocks([AuthRepository, UserRepository, LocalRepository])
 void main() {
+  late Widget materialApp;
+  late MockAuthRepository mockAuthRepository;
+  late MockUserRepository mockUserRepository;
+  late MockLocalRepository mockLocalRepository;
+  setUp(() {
+    mockAuthRepository = MockAuthRepository();
+    mockUserRepository = MockUserRepository();
+    mockLocalRepository = MockLocalRepository();
+    materialApp = MaterialApp(
+      home: BlocProvider<AuthBloc>(
+        create: (context) => AuthBloc(
+          saveTokenUseCase: SaveTokenUseCase(
+            localRepository: mockLocalRepository,
+          ),
+          createUserUseCase: CreateUserUseCase(
+            repository: mockUserRepository,
+          ),
+          registerUserUseCase: RegisterUserUseCase(
+            authRepository: mockAuthRepository,
+          ),
+          updateUserUseCase: UpdateUserUseCase(
+            repository: mockUserRepository,
+          ),
+          persistUserUseCase: PersistUserUseCase(
+            localRepository: mockLocalRepository,
+          ),
+        ),
+        child: const RegisterPage(),
+      ),
+    );
+  });
   group('Register - Step 1: SingUp Form', () {
     testWidgets('Should have a form when user is redirected to RegisterPage',
         (WidgetTester tester) async {
-      await tester.pumpWidget(MaterialApp(
-        initialRoute: Routes.register,
-        routes: AppPages.routes,
-      ));
+      await tester.pumpWidget(materialApp);
       // start in Register Page
       Finder page = find.byType(RegisterPage);
       expect(page, findsOneWidget);
