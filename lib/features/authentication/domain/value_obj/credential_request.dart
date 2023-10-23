@@ -1,6 +1,8 @@
 class CredentialRequest {
+  String email;
+  String password;
   CredentialRequest({
-    required String email,
-    required String password,
+    required this.email,
+    required this.password,
   });
 }

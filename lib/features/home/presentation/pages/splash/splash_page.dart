@@ -24,9 +24,8 @@ class SplashPage extends StatelessWidget {
               SolidButton(
                 key: const Key("Register"),
                 label: "Register",
-                onPressed: () {
-                  Navigator.of(context).pushNamed(Routes.register);
-                },
+                onPressed: () =>
+                    Navigator.of(context).pushNamed(Routes.register),
               ),
               FlatButton(
                 label: "Maybe later",

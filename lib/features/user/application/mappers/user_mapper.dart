@@ -5,9 +5,9 @@ import '/features/user/domain/value_obj/email_address.dart';
 import '/features/user/infrastructure/models/user_model.dart';
 import '/features/user/application/mappers/address_mapper.dart';
 
-class UserMapper {
-  UserEntity toEntity(UserModel dto) => dto.toDomain();
-  UserModel toModel(UserEntity entity) => entity.toModel();
+abstract class UserMapper {
+  static UserEntity toEntity(UserModel dto) => dto.toDomain();
+  static UserModel toModel(UserEntity entity) => entity.toModel();
 }
 
 extension UserEntityExt on UserEntity {
