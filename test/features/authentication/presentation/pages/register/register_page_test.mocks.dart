@@ -215,9 +215,15 @@ class MockLocalRepository extends _i1.Mock implements _i9.LocalRepository {
       );
 
   @override
-  set currentUser(String? value) => super.noSuchMethod(
+  String get userId => (super.noSuchMethod(
+        Invocation.getter(#userId),
+        returnValue: '',
+      ) as String);
+
+  @override
+  set userId(String? value) => super.noSuchMethod(
         Invocation.setter(
-          #currentUser,
+          #userId,
           value,
         ),
         returnValueForMissingStub: null,

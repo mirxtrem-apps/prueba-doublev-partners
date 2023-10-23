@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_tdd/features/authentication/application/use_cases/persist_user_use_case.dart';
 import 'package:flutter_tdd/features/authentication/application/use_cases/register_user_use_case.dart';
 import 'package:flutter_tdd/features/authentication/application/use_cases/save_token_use_case.dart';
 import 'package:flutter_tdd/features/authentication/presentation/bloc/auth_bloc.dart';
@@ -48,18 +49,22 @@ class MainApp extends StatelessWidget {
       ],
       child: BlocProvider<AuthBloc>(
         create: (context) => AuthBloc(
-            registerUserUseCase: RegisterUserUseCase(
-              authRepository: context.read<IAuthRepository>(),
-            ),
-            createUserUseCase: CreateUserUseCase(
-              repository: context.read<IUserRepository>(),
-            ),
-            saveTokenUseCase: SaveTokenUseCase(
-              localRepository: context.read<ILocalRepository>(),
-            ),
-            updateUserUseCase: UpdateUserUseCase(
-              repository: context.read<IUserRepository>(),
-            )),
+          registerUserUseCase: RegisterUserUseCase(
+            authRepository: context.read<IAuthRepository>(),
+          ),
+          createUserUseCase: CreateUserUseCase(
+            repository: context.read<IUserRepository>(),
+          ),
+          saveTokenUseCase: SaveTokenUseCase(
+            localRepository: context.read<ILocalRepository>(),
+          ),
+          updateUserUseCase: UpdateUserUseCase(
+            repository: context.read<IUserRepository>(),
+          ),
+          persistUserUseCase: PersistUserUseCase(
+            localRepository: context.read<ILocalRepository>(),
+          ),
+        ),
         child: MaterialApp(
           title: 'Double V Partners',
           theme: AppTheme.light(),

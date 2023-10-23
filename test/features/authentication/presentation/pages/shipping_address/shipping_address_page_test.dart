@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:flutter_tdd/features/authentication/application/use_cases/register_user_use_case.dart';
-import 'package:flutter_tdd/features/authentication/application/use_cases/save_token_use_case.dart';
 import 'package:flutter_tdd/features/authentication/presentation/bloc/auth_bloc.dart';
+import 'package:flutter_tdd/features/user/application/use_cases/use_cases.dart';
+import 'package:flutter_tdd/features/authentication/application/use_cases/use_cases.dart';
 import 'package:flutter_tdd/features/authentication/presentation/pages/shipping_address/shipping_address_page.dart';
-import 'package:flutter_tdd/features/user/application/use_cases/create_user_use_case.dart';
-import 'package:flutter_tdd/features/user/application/use_cases/update_user_use_case.dart';
 
 import '../register/register_page_test.mocks.dart';
 
@@ -34,6 +32,9 @@ void main() {
           ),
           updateUserUseCase: UpdateUserUseCase(
             repository: mockUserRepository,
+          ),
+          persistUserUseCase: PersistUserUseCase(
+            localRepository: mockLocalRepository,
           ),
         ),
         child: const ShippingAddressPage(),

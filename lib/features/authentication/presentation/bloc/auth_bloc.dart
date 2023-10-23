@@ -1,17 +1,19 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_tdd/core/di/di.dart';
-import 'package:flutter_tdd/features/authentication/application/use_cases/save_token_use_case.dart';
-import 'package:flutter_tdd/features/user/application/use_cases/update_user_use_case.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+
+import '/core/di/di.dart';
 import '/features/authentication/application/use_cases/register_user_use_case.dart';
 import '/features/authentication/domain/value_obj/credential_request.dart';
 import '/features/user/application/use_cases/create_user_use_case.dart';
 import '/features/user/domain/entities/user_entity.dart';
 import '/features/user/domain/value_obj/address.dart';
 import '/features/user/domain/value_obj/email_address.dart';
+import '/features/authentication/application/use_cases/persist_user_use_case.dart';
+import '/features/authentication/application/use_cases/save_token_use_case.dart';
+import '/features/user/application/use_cases/update_user_use_case.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -22,6 +24,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final CreateUserUseCase createUserUseCase;
   final UpdateUserUseCase updateUserUseCase;
   final SaveTokenUseCase saveTokenUseCase;
+  final PersistUserUseCase persistUserUseCase;
 
   UserEntity? userEntity;
 
@@ -37,6 +40,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required this.createUserUseCase,
     required this.updateUserUseCase,
     required this.saveTokenUseCase,
+    required this.persistUserUseCase,
   }) : super(const _Initial()) {
     on<RegisterUserEvent>(_registerUser);
     on<CreateUserEvent>(_createUser);
@@ -84,6 +88,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       (exception) => AuthState.failure(exception.toString()),
       (_) => const AuthState.userCreated(),
     );
+    if (result is _UserCreatedState) {
+      final state = await persistUserUseCase(userEntity);
+      state.fold((e) => AuthState.failure(e.toString()), (_) {});
+    }
+
     emit(result);
   }
 
@@ -105,7 +114,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       (exception) => AuthState.failure(exception.toString()),
       (_) => const AuthState.userUpdated(),
     );
+
+    if (result is _UserUpdatedState) {
+      final state = await persistUserUseCase(userEntity);
+      state.fold((e) => AuthState.failure(e.toString()), (_) {});
+    }
+
     emit(result);
   }
-
 }

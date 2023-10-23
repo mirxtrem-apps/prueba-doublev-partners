@@ -23,7 +23,7 @@ class UserRepository implements IUserRepository {
   Future<UserModel> getUserById(String id) async {
     final doc = await usersRef.doc(id).get();
     if (!doc.exists) {
-      throw UserNotFoundException();
+      throw UserNotFoundException('User not found');
     }
     return doc.data()!;
   }

@@ -20,6 +20,8 @@ extension UserEntityExt on UserEntity {
       addresses: addresses.map((e) => e.toModel()).toList(),
     );
   }
+
+  String get fullName => "$firstname $lastname";
 }
 
 extension UserDtoExt on UserModel {
