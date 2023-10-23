@@ -68,8 +68,8 @@ class RegisterPage extends StatelessWidget {
   _showLoadingModal(BuildContext context) {
     Modals.showLoadingModal(
       context,
-      title: "Estamos creando tu cuenta",
-      message: "Por favor espere...",
+      title: "Creating account...",
+      message: "Please, wait",
     );
   }
 

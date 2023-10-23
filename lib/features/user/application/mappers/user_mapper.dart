@@ -1,4 +1,3 @@
-
 import '/core/utils/date_time_utils.dart';
 import '/features/user/domain/entities/user_entity.dart';
 import '/features/user/domain/value_obj/email_address.dart';
@@ -17,8 +16,8 @@ extension UserEntityExt on UserEntity {
       firstname: firstname,
       lastname: lastname,
       email: email.value,
-      birthdate: DateTimeUtils.toDateTime(birthdate) ,
-      addresses: [],
+      birthdate: DateTimeUtils.toDateTime(birthdate),
+      addresses: addresses.map((e) => e.toModel()).toList(),
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:flutter_tdd/features/authentication/application/use_cases/regist
 import 'package:flutter_tdd/features/authentication/application/use_cases/save_token_use_case.dart';
 import 'package:flutter_tdd/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:flutter_tdd/features/user/application/use_cases/create_user_use_case.dart';
+import 'package:flutter_tdd/features/user/application/use_cases/update_user_use_case.dart';
 import 'package:flutter_tdd/features/user/domain/repositories/i_user_repository.dart';
 import 'package:flutter_tdd/features/user/infrastructure/repositories/user_repository.dart';
 
@@ -47,16 +48,18 @@ class MainApp extends StatelessWidget {
       ],
       child: BlocProvider<AuthBloc>(
         create: (context) => AuthBloc(
-          registerUserUseCase: RegisterUserUseCase(
-            authRepository: context.read<IAuthRepository>(),
-          ),
-          createUserUseCase: CreateUserUseCase(
-            repository: context.read<IUserRepository>(),
-          ),
-          saveTokenUseCase: SaveTokenUseCase(
-            localRepository: context.read<ILocalRepository>(),
-          ),
-        ),
+            registerUserUseCase: RegisterUserUseCase(
+              authRepository: context.read<IAuthRepository>(),
+            ),
+            createUserUseCase: CreateUserUseCase(
+              repository: context.read<IUserRepository>(),
+            ),
+            saveTokenUseCase: SaveTokenUseCase(
+              localRepository: context.read<ILocalRepository>(),
+            ),
+            updateUserUseCase: UpdateUserUseCase(
+              repository: context.read<IUserRepository>(),
+            )),
         child: MaterialApp(
           title: 'Double V Partners',
           theme: AppTheme.light(),

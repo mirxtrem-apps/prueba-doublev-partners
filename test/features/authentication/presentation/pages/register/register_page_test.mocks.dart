@@ -215,15 +215,9 @@ class MockLocalRepository extends _i1.Mock implements _i9.LocalRepository {
       );
 
   @override
-  bool get isAuthenticated => (super.noSuchMethod(
-        Invocation.getter(#isAuthenticated),
-        returnValue: false,
-      ) as bool);
-
-  @override
-  set isAuthenticated(bool? value) => super.noSuchMethod(
+  set currentUser(String? value) => super.noSuchMethod(
         Invocation.setter(
-          #isAuthenticated,
+          #currentUser,
           value,
         ),
         returnValueForMissingStub: null,

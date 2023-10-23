@@ -1,6 +1,6 @@
-import 'package:flutter_tdd/features/authentication/domain/exceptions/invalid_email_exception.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '/core/app/domain/exceptions/invalid_token_exception.dart';
 import '/core/app/domain/repositories/i_local_repository.dart';
 
 class LocalRepository implements ILocalRepository {
@@ -13,14 +13,14 @@ class LocalRepository implements ILocalRepository {
   @override
   set token(String? value) {
     if(value == null) {
-      throw InvalidEmailException('Token can not be null');
+      throw InvalidTokenException('Token can not be null');
     }
     prefs.setString('TOKEN', value);
   }
 
   @override
-  bool get isAuthenticated => prefs.getBool('AUTHED') ?? false;
+  String? get currentUser => prefs.getString('USER');
   @override
-  set isAuthenticated(bool value) => prefs.setBool('AUTHED', value);
+  set currentUser(String? value) => prefs.setString('USER', value!);
 
 }

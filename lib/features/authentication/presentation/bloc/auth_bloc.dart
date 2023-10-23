@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tdd/core/di/di.dart';
 import 'package:flutter_tdd/features/authentication/application/use_cases/save_token_use_case.dart';
+import 'package:flutter_tdd/features/user/application/use_cases/update_user_use_case.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '/features/authentication/application/use_cases/register_user_use_case.dart';
@@ -19,13 +20,14 @@ part 'auth_bloc.freezed.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final RegisterUserUseCase registerUserUseCase;
   final CreateUserUseCase createUserUseCase;
+  final UpdateUserUseCase updateUserUseCase;
   final SaveTokenUseCase saveTokenUseCase;
 
   UserEntity? userEntity;
 
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController emailCtrl = TextEditingController();
   TextEditingController passwordCtrl = TextEditingController();
+
   TextEditingController firstnameCtrl = TextEditingController();
   TextEditingController lastnameCtrl = TextEditingController();
   TextEditingController birthdateCtrl = TextEditingController();
@@ -33,6 +35,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({
     required this.registerUserUseCase,
     required this.createUserUseCase,
+    required this.updateUserUseCase,
     required this.saveTokenUseCase,
   }) : super(const _Initial()) {
     on<RegisterUserEvent>(_registerUser);
@@ -96,14 +99,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     final updatedUser = userEntity?.copyWith(addresses: [address]);
 
-    final state = await createUserUseCase(updatedUser);
+    final state = await updateUserUseCase(updatedUser);
 
     final result = state.fold(
       (exception) => AuthState.failure(exception.toString()),
-      (_) => const AuthState.userCreated(),
+      (_) => const AuthState.userUpdated(),
     );
     emit(result);
   }
 
-  bool get isFormValid => formKey.currentState?.validate() ?? false;
 }

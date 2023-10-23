@@ -31,6 +31,14 @@ abstract class InputUtils {
     return errorMessage;
   }
 
+  static String? isZipCode(String? value) {
+    String? errorMessage;
+    if(value!.length < 5) {
+      errorMessage = 'Enter a valid zip code';
+    }
+    return errorMessage;
+  }
+
   static TextInputFormatter formatterDate() {
     final maskFormatter = MaskTextInputFormatter(
       mask: '##/##/####',

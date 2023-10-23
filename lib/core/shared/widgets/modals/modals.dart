@@ -16,7 +16,7 @@ class Modals {
         content: Row(
           children: [
             const CircularProgressIndicator(),
-            const SizedBox(width: 8.0),
+            const SizedBox(width: 12.0),
             Text(message, style: LabelStyle.paragraph()),
           ],
         ),

@@ -8,12 +8,12 @@ import 'package:flutter_tdd/features/authentication/infrastructure/repositories/
 import 'package:flutter_tdd/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:flutter_tdd/features/authentication/presentation/pages/register/register_page.dart';
 import 'package:flutter_tdd/features/user/application/use_cases/create_user_use_case.dart';
+import 'package:flutter_tdd/features/user/application/use_cases/update_user_use_case.dart';
 import 'package:flutter_tdd/features/user/infrastructure/repositories/user_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 
 import 'register_page_test.mocks.dart';
-
 
 @GenerateMocks([AuthRepository, UserRepository, LocalRepository])
 void main() {
@@ -36,6 +36,9 @@ void main() {
           ),
           registerUserUseCase: RegisterUserUseCase(
             authRepository: mockAuthRepository,
+          ),
+          updateUserUseCase: UpdateUserUseCase(
+            repository: mockUserRepository,
           ),
         ),
         child: const RegisterPage(),

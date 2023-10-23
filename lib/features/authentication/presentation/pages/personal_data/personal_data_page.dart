@@ -65,8 +65,8 @@ class PersonalDataPage extends StatelessWidget {
   Future<dynamic> _showLoading(BuildContext context) {
     return Modals.showLoadingModal(
       context,
-      title: "Saving...",
-      message: "Please wait.",
+      title: "Saving data...",
+      message: "Please, wait.",
     );
   }
 

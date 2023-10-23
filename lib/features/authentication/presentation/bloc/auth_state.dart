@@ -8,6 +8,6 @@ class AuthState with _$AuthState {
     required UserCredential userCredential,
   }) = _UserRegisteredState;
   const factory AuthState.userCreated() = _UserCreatedState;
-  const factory AuthState.failure(String message) =
-      _RegisterFailureState;
+  const factory AuthState.userUpdated() = _UserUpdatedState;
+  const factory AuthState.failure(String message) = _AuthFailureState;
 }
