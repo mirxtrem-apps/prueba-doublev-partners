@@ -15,8 +15,8 @@ abstract class Di {
   static Future<void> init() async {
     
     // Persistence
-    final sharedPreferences = SharedPreferences.getInstance();
-    instance.registerLazySingletonAsync<SharedPreferences>(() => sharedPreferences);
+    final sharedPreferences = await SharedPreferences.getInstance();
+    instance.registerSingleton<SharedPreferences>(sharedPreferences);
     
     // Authentication
     final firebaseAuth = FirebaseAuth.instance;

@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_tdd/core/di/di.dart';
+import 'package:flutter_tdd/features/authentication/application/use_cases/save_token_use_case.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 
 import '/features/authentication/application/use_cases/register_user_use_case.dart';
 import '/features/authentication/domain/value_obj/credential_request.dart';
@@ -18,6 +19,7 @@ part 'auth_bloc.freezed.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final RegisterUserUseCase registerUserUseCase;
   final CreateUserUseCase createUserUseCase;
+  final SaveTokenUseCase saveTokenUseCase;
 
   UserEntity? userEntity;
 
@@ -31,6 +33,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({
     required this.registerUserUseCase,
     required this.createUserUseCase,
+    required this.saveTokenUseCase,
   }) : super(const _Initial()) {
     on<RegisterUserEvent>(_registerUser);
     on<CreateUserEvent>(_createUser);
@@ -48,9 +51,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     final state = await registerUserUseCase(request);
 
     final result = state.fold(
-      (exception) => AuthState.failure(exception.toString()),
-      (cred) => const AuthState.userRegistered(),
+      (e) => AuthState.failure(e.toString()),
+      (response) => AuthState.userRegistered(
+        userCredential: response,
+      ),
     );
+
+    if (result is _UserRegisteredState) {
+      final token = result.userCredential.credential?.accessToken;
+      final state = await saveTokenUseCase(token);
+      state.fold((e) => AuthState.failure(e.toString()), (_) {});
+    }
+
     emit(result);
   }
 

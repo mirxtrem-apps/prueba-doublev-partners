@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_tdd/core/shared/widgets/modals/modals.dart';
 
 import '/core/routes/app_routes.dart';
-import '/core/theme/label_styles.dart';
 import '/core/shared/widgets/buttons/buttons.dart';
 import '/core/shared/widgets/inputs/inputs.dart';
 import '/core/shared/widgets/labels/title_label.dart';
@@ -19,7 +19,7 @@ class RegisterPage extends StatelessWidget {
         state.maybeWhen(
           orElse: () {},
           loading: () => _showLoadingModal(context),
-          userRegistered: () => _goToNext(context),
+          userRegistered: (_) => _goToNext(context),
           failure: (message) => _showErrorMessage(context, message),
         );
       },
@@ -66,34 +66,27 @@ class RegisterPage extends StatelessWidget {
   }
 
   _showLoadingModal(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        title: Text("Estamos creando tu cuenta", style: LabelStyle.title()),
-        content: const Row(
-          children: [
-            CircularProgressIndicator(),
-            SizedBox(width: 8.0),
-            Text("Por favor espere..."),
-          ],
-        ),
-      ),
+    Modals.showLoadingModal(
+      context,
+      title: "Estamos creando tu cuenta",
+      message: "Por favor espere...",
     );
   }
 
   _goToNext(BuildContext context) {
-    Navigator.popAndPushNamed(context, Routes.personalData);
+    Navigator.pop(context);
+    Navigator.pushReplacementNamed(
+      context,
+      Routes.personalData,
+    );
   }
 
   _showErrorMessage(BuildContext context, String message) {
     Navigator.pop(context);
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text("Estamos creando tu cuenta", style: LabelStyle.title()),
-        content: Text(message, style: LabelStyle.paragraph()),
-      ),
+    Modals.showSimpleModal(
+      context,
+      title: "Upps!",
+      message: message,
     );
   }
 }

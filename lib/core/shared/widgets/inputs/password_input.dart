@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tdd/core/utils/input_validators_utils.dart';
+import 'package:flutter_tdd/core/utils/input_utils.dart';
 
 class PasswordInput extends StatefulWidget {
   const PasswordInput({
@@ -33,7 +33,7 @@ class _PasswordInputState extends State<PasswordInput> {
                 obscureText ? Icons.visibility_off : Icons.visibility,
               ),
             )),
-        validator: InputValidatorsUtils.isPasswordValid,
+        validator: InputUtils.isPasswordValid,
       ),
     );
   }

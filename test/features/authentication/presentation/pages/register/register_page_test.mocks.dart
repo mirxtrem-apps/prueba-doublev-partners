@@ -3,16 +3,19 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i6;
+import 'dart:async' as _i7;
 
 import 'package:cloud_firestore/cloud_firestore.dart' as _i3;
 import 'package:firebase_auth/firebase_auth.dart' as _i2;
+import 'package:flutter_tdd/core/app/infrastructure/repositories/local_repository.dart'
+    as _i9;
+import 'package:flutter_tdd/core/di/di.dart' as _i5;
 import 'package:flutter_tdd/features/authentication/infrastructure/repositories/auth_repository.dart'
-    as _i5;
+    as _i6;
 import 'package:flutter_tdd/features/user/infrastructure/models/user_model.dart'
     as _i4;
 import 'package:flutter_tdd/features/user/infrastructure/repositories/user_repository.dart'
-    as _i7;
+    as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -68,10 +71,21 @@ class _FakeUserModel_3 extends _i1.SmartFake implements _i4.UserModel {
         );
 }
 
+class _FakeSharedPreferences_4 extends _i1.SmartFake
+    implements _i5.SharedPreferences {
+  _FakeSharedPreferences_4(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [AuthRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
+class MockAuthRepository extends _i1.Mock implements _i6.AuthRepository {
   MockAuthRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -86,7 +100,7 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
       ) as _i2.FirebaseAuth);
 
   @override
-  _i6.Future<_i2.UserCredential> register(
+  _i7.Future<_i2.UserCredential> register(
     String? email,
     String? password,
   ) =>
@@ -98,7 +112,7 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
             password,
           ],
         ),
-        returnValue: _i6.Future<_i2.UserCredential>.value(_FakeUserCredential_1(
+        returnValue: _i7.Future<_i2.UserCredential>.value(_FakeUserCredential_1(
           this,
           Invocation.method(
             #register,
@@ -108,13 +122,13 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
             ],
           ),
         )),
-      ) as _i6.Future<_i2.UserCredential>);
+      ) as _i7.Future<_i2.UserCredential>);
 }
 
 /// A class which mocks [UserRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
+class MockUserRepository extends _i1.Mock implements _i8.UserRepository {
   MockUserRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -139,37 +153,79 @@ class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
       );
 
   @override
-  _i6.Future<void> createUser(_i4.UserModel? user) => (super.noSuchMethod(
+  _i7.Future<void> createUser(_i4.UserModel? user) => (super.noSuchMethod(
         Invocation.method(
           #createUser,
           [user],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
-  _i6.Future<_i4.UserModel> getUserById(String? id) => (super.noSuchMethod(
+  _i7.Future<_i4.UserModel> getUserById(String? id) => (super.noSuchMethod(
         Invocation.method(
           #getUserById,
           [id],
         ),
-        returnValue: _i6.Future<_i4.UserModel>.value(_FakeUserModel_3(
+        returnValue: _i7.Future<_i4.UserModel>.value(_FakeUserModel_3(
           this,
           Invocation.method(
             #getUserById,
             [id],
           ),
         )),
-      ) as _i6.Future<_i4.UserModel>);
+      ) as _i7.Future<_i4.UserModel>);
 
   @override
-  _i6.Future<void> updateUserById(_i4.UserModel? user) => (super.noSuchMethod(
+  _i7.Future<void> updateUserById(_i4.UserModel? user) => (super.noSuchMethod(
         Invocation.method(
           #updateUserById,
           [user],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+}
+
+/// A class which mocks [LocalRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockLocalRepository extends _i1.Mock implements _i9.LocalRepository {
+  MockLocalRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.SharedPreferences get prefs => (super.noSuchMethod(
+        Invocation.getter(#prefs),
+        returnValue: _FakeSharedPreferences_4(
+          this,
+          Invocation.getter(#prefs),
+        ),
+      ) as _i5.SharedPreferences);
+
+  @override
+  set token(String? value) => super.noSuchMethod(
+        Invocation.setter(
+          #token,
+          value,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  bool get isAuthenticated => (super.noSuchMethod(
+        Invocation.getter(#isAuthenticated),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  set isAuthenticated(bool? value) => super.noSuchMethod(
+        Invocation.setter(
+          #isAuthenticated,
+          value,
+        ),
+        returnValueForMissingStub: null,
+      );
 }

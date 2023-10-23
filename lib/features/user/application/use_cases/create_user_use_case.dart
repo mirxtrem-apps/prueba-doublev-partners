@@ -13,7 +13,8 @@ class CreateUserUseCase implements IUseCase<UserEntity, void> {
   @override
   Future<Either<Exception, void>> call([UserEntity? params]) async {
     try {
-      final resp = await repository.createUser(UserMapper.toModel(params!));
+      final userModel = UserMapper.toModel(params!);
+      final resp = await repository.createUser(userModel);
       return Right(resp);
     } catch (e) {
       return Left(Exception(e.toString()));
