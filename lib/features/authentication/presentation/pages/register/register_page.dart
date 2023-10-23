@@ -17,7 +17,7 @@ class RegisterPage extends StatelessWidget {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         state.maybeWhen(
-          orElse: () => null,
+          orElse: () {},
           loading: () => _showLoadingModal(context),
           userRegistered: () => _goToNext(context),
           failure: (message) => _showErrorMessage(context, message),
@@ -29,7 +29,7 @@ class RegisterPage extends StatelessWidget {
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(16.0),
             child: Form(
-              key: bloc.formKey,
+              // key: bloc.formKey,
               child: Column(
                 children: [
                   const TitleLabel(text: "Register"),
@@ -47,8 +47,9 @@ class RegisterPage extends StatelessWidget {
                   SolidButton(
                     key: const Key("Registro"),
                     label: "Sign Up",
-                    onPressed: () =>
-                        bloc.add(const AuthEvent.registerUser()),
+                    onPressed: () {
+                      bloc.add(const AuthEvent.registerUser());
+                    },
                   ),
                   const FlatButton(
                     key: Key("Login"),
